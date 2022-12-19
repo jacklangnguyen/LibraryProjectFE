@@ -1,0 +1,139 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <!--    <img-->
+    <!--      id="profile-img"-->
+    <!--      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"-->
+    <!--      class="profile-img-card"-->
+    <!--    />-->
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && saveBook()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="nameBook">Tên Sách</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nameBook"
+          [(ngModel)]="form.bookName"
+          required
+          minlength="3"
+          maxlength="20"
+          #nameBook="ngModel"
+        />
+        <div class="alert-danger" *ngIf="nameBook.errors && f.submitted">
+          <div *ngIf="nameBook.errors.required">name Book is required</div>
+          <div *ngIf="nameBook.errors.minlength">
+            User name must be at least 3 characters
+          </div>
+          <div *ngIf="nameBook.errors.maxlength">
+            User name must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="bookId">Mã Sách</label>
+        <input
+          type="text"
+          class="form-control"
+          name="bookId"
+          [(ngModel)]="form.bookId"
+          required
+          minlength="1"
+          maxlength="20"
+          #bookId="ngModel"
+        />
+        <div class="alert-danger" *ngIf="bookId.errors && f.submitted">
+          <div *ngIf="bookId.errors.required">Book Id is required</div>
+          <div *ngIf="bookId.errors.minlength">
+            User name must be at least 1 characters
+          </div>
+          <div *ngIf="bookId.errors.maxlength">
+            Book Id must be at most 20 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="bookAuthor">Tác Giả</label>
+        <input
+          type="text"
+          class="form-control"
+          name="bookAuthor"
+          [(ngModel)]="form.bookAuthor"
+          required
+          minlength="3"
+          maxlength="20"
+          #bookAuthor="ngModel"
+        />
+        <div class="alert-danger" *ngIf="bookAuthor.errors && f.submitted">
+          <div *ngIf="bookAuthor.errors.required">book Author is required</div>
+          <div *ngIf="bookAuthor.errors.minlength">
+            User name must be at least 3 characters
+          </div>
+          <div *ngIf="bookAuthor.errors.maxlength">
+            User name must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="bookPublisher">Nhà Xuất Bản</label>
+        <input
+          type="text"
+          class="form-control"
+          name="bookPublisher"
+          [(ngModel)]="form.bookPublisher"
+          required
+          minlength="3"
+          maxlength="20"
+          #bookPublisher="ngModel"
+        />
+        <div class="alert-danger" *ngIf="bookPublisher.errors && f.submitted">
+          <div *ngIf="bookPublisher.errors.required">book Publisher is required</div>
+          <div *ngIf="bookPublisher.errors.minlength">
+            User name must be at least 3 characters
+          </div>
+          <div *ngIf="bookPublisher.errors.maxlength">
+            User name must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="bookTopic">Chủ Đề</label>
+        <input
+          type="text"
+          class="form-control"
+          name="bookTopic"
+          [(ngModel)]="form.bookTopic"
+          required
+          minlength="3"
+          maxlength="20"
+          #bookTopic="ngModel"
+        />
+        <div class="alert-danger" *ngIf="bookTopic.errors && f.submitted">
+          <div *ngIf="bookTopic.errors.required">book Topic is required</div>
+          <div *ngIf="bookTopic.errors.minlength">
+            User name must be at least 3 characters
+          </div>
+          <div *ngIf="bookTopic.errors.maxlength">
+            User name must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">ADD BOOK</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        Add Book failed!<br/>{{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Book added successful!
+    </div>
+  </div>
+</div>

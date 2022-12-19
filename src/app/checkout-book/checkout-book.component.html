@@ -1,0 +1,101 @@
+
+<div class="menu-tool-bar he">
+  <div class="ptitle">
+    <span jhiTranslate="ebwebApp.tM02TAIN.home.title">Danh sách các sách thành viên mượn</span>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-ct-2 col-form-label pr-0" for="txtSearchValue" jhiTranslate="ebwebApp.purchaseOrder.keywordSearch">Từ khóa tìm kiếm</label>
+    <div class="col-sm-10 col-ct-10">
+      <input [(ngModel)]="keyWord" (change)="loadAllForSearch()"
+             id="txtSearchValue" name="txtSearchValue" type="text"
+             class="form-control form-control-sm">
+    </div>
+  </div>
+  <div class="gr-toolbar" style="padding-bottom: 5px;">
+    <button  class="button-navigation" (click)="addNew()"
+            title="{{'ebwebApp.outWard.tooltipAdd' }}"><i class="mdi mdi-plus"></i> <span
+      jhiTranslate="ebwebApp.mCReceipt.home.add">Thêm</span></button>
+
+    <button  class="button-navigation" (click)="delete()"><i
+      class="mdi mdi-delete"></i> <span jhiTranslate="ebwebApp.dataBackup.delete">Xóa</span></button>
+  </div>
+</div>
+<div class="frm-main frm-tables frm-padding modal-body" style="background: #cbdcf0; margin-top: 5px; height: 700px; padding: 2px">
+  <div id="table-scroll0" class="table-scroll" style="height: 690px !important;max-height: 690px;min-width: unset !important;">
+    <table id="main-table0" class="main-table">
+      <thead>
+      <tr>
+        <th scope="col" jhiTranslate="ebwebApp.tM01GTGT.declarationName">Tên Sách </th>
+        <th scope="col" jhiTranslate="ebwebApp.tM01GTGT.declarationTerm">Mã Sách </th>
+        <th scope="col"  style="width: 150px" jhiTranslate="ebwebApp.tM01GTGT.isFirstDeclaration">Tên người dùng </th>
+        <th scope="col" style="width: 150px" jhiTranslate="ebwebApp.tM01GTGT.additionTime">Mã người dùng </th>
+<!--        <th scope="col" style="width: 150px" jhiTranslate="ebwebApp.tM01GTGT.bookTopic">Chủ Đề </th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let detail1 of checkoutBook ;let i = index; trackBy: trackId;"
+        [class.selected]="checkSelect(detail1)"
+        (click)="selectedRowFun(detail1)"
+        class="row_table"
+        [ngClass]="{'selectItem': selectedItem && selectedItem.id === detail1.id}"
+        (dblclick)="doubleClickRow(detail1)">
+<!--          (click)="selectMultiRow(detail, $event, tM02TAINs)" -->
+<!--          (dblclick)="doubleClickRow(detail)" -->
+
+        <td class="jsgrid-cell jsgrid-align-center"  style="width: 150px">{{detail1.bookName}}</td>
+        <td class="jsgrid-cell jsgrid-align-left" style="width: 150px">{{detail1.bookId}}</td>
+
+        <td class="jsgrid-cell jsgrid-align-center">{{detail1.userName}}</td>
+        <td class="jsgrid-cell jsgrid-align-center">{{detail1.userId}}</td>
+<!--        <td class="jsgrid-cell jsgrid-align-center">{{detail.bookTopic}}</td>-->
+
+
+      </tr>
+<!--      <tr *ngFor="let l of book">-->
+<!--        <td class="jsgrid-cell jsgrid-align-right">&nbsp;</td>-->
+<!--        <td class="jsgrid-cell jsgrid-align-right">&nbsp;</td>-->
+<!--        <td class="jsgrid-cell jsgrid-align-right">&nbsp;</td>-->
+<!--        <td class="jsgrid-cell jsgrid-align-right">&nbsp;</td>-->
+<!--      </tr>-->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div style="padding-right: 16px;">
+<!--  *ngIf="tM02TAINs && tM02TAINs?.length"-->
+
+  <div class="row" style="height: 32px">
+    <div class="col-md-12">
+      <div class="row justify-content-end" style="height:32px">
+        <div class="col-lg-5">
+          <div class="form-group row justify-content-end">
+            <label class="col-sm-9 col-form-label" for="itemsPerPage"
+                   style="padding-right: 0px;text-align: right;"><span
+              jhiTranslate="ebwebApp.mBDeposit.totalPage"></span>: {{totalItems}}</label>
+            <div class="col-sm-3 pd-l-0" style="padding-right: 5px;padding-left: 5px;">
+              <select class="form-control form-control-sm" name="itemsPerPage"
+                      id="itemsPerPage"
+                      style="background-color: #f5f7fa;"
+                      [(ngModel)]="itemsPerPage"
+                      (ngModelChange)="selectedItemPerPage()"
+                  >
+                <option [value]="10">10</option>
+                <option [value]="20">20</option>
+                <option [value]="30">30</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="justify-content-end">
+          <ngb-pagination [size]="'sm'" [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
+                          [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                          (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
